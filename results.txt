@@ -1,0 +1,5 @@
+     Date                      Filename          Number of People Detected
+2021-01-30 16:38:32          image1.jpg               0
+2021-01-30 16:38:33          image2.jpg               0
+2021-01-30 16:38:34          image3.jpg               2
+2021-01-30 16:38:34          image4.jpg               1

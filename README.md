@@ -1,4 +1,9 @@
 
+
+# Person Detection 
+
+Person Detection using HOG as descriptor as Linear SVM as classifier using the OpenCV Library.
+
 ## Build Project
 
 ```
