@@ -55,7 +55,6 @@ int main(int argc, char** argv )
 	map<String, Mat> m = load_images(argv[1]);
 	PersonDetector detector(m, "results.txt");
 
-
 	detector.run();
 	
 	

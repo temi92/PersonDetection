@@ -4,7 +4,7 @@
 PersonDetector::PersonDetector(const map<String, Mat> &m, const string&filename):m{m}, of{filename}, hog() 
 {
 
-	 hog.setSVMDetector(HOGDescriptor::getDefaultPeopleDetector());
+	hog.setSVMDetector(HOGDescriptor::getDefaultPeopleDetector());
 
 
 }
@@ -12,21 +12,20 @@ PersonDetector::PersonDetector(const map<String, Mat> &m, const string&filename)
 
 vector <Rect> PersonDetector::detect(const Mat& img)
 {
+
 	vector<Rect> found;
-    hog.detectMultiScale(img, found, 0.6, Size(4,4), Size(), 1.08, 2, false);
-    return found;
+	hog.detectMultiScale(img, found, 0.6, Size(4,4), Size(), 1.08, 2, false);
+	return found;
 
 }
 
 void PersonDetector::run(){
+
 	String folder = "results/";
-
     //write header for text file ...
-    of << setw(5) << "" << "Date" << setw(22) << " " << "Filename" << setw(10) << " " << "Number of People Detected" << endl;
+	of << setw(5) << "" << "Date" << setw(22) << " " << "Filename" << setw(10) << " " << "Number of People Detected" << endl;
 
-
-    utils::fs::createDirectory(folder);
-
+	utils::fs::createDirectory(folder);
 	for (auto it= m.begin(); it!=m.end(); ++it){
 
 		// detect person in img
@@ -34,9 +33,8 @@ void PersonDetector::run(){
 		int num_of_people = rects.size();
 
 		string text = to_string(num_of_people) + " detected";
-        addText(it->second, text);
-        drawRect(it->second, rects);
-
+		addText(it->second, text);
+		drawRect(it->second, rects);
 		String filename = get_FileName(it->first);
 
 		imwrite(folder+filename, it->second);
@@ -51,20 +49,21 @@ void PersonDetector::run(){
 
 void PersonDetector::addText(Mat &img, string text){
 	putText(img, text, 
-    Point(img.cols/2, 100), 
-    FONT_HERSHEY_DUPLEX,
-    1.8,
-    CV_RGB(0, 255, 0), //font color
-    2);
+	Point(img.cols/2, 100), 
+	FONT_HERSHEY_DUPLEX,
+	1.8,
+	CV_RGB(0, 255, 0), //font color
+	2);
 }
 
 
 void PersonDetector::drawRect(Mat &img, const vector<Rect>& rects)
 {
+	
 	for (auto&r : rects){
 
-		rectangle(img, r.tl(), r.br(), cv::Scalar(0, 255, 0), 2);
-    }
+	rectangle(img, r.tl(), r.br(), cv::Scalar(0, 255, 0), 2);
+   	}
         
 }
 
